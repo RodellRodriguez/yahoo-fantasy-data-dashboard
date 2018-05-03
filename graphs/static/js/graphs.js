@@ -97,13 +97,13 @@ function make_tables(stats, stat_category){
 function calc_avg(stats){
 	const average = stats.reduce((sum,current) => {
 		if (isString(sum) || isString(current)){
-			sum = parseFloat(sum).toFixed(4);
-			current = parseFloat(current).toFixed(4);
+			sum = parseFloat(sum);
+			current = parseFloat(current);
 		}
 		return sum+current;
 	})/stats.length;
 	console.log("average is >>>", average);
-	return average;
+	return average.toFixed(3);
 }
 
 function isString (value) {
@@ -111,4 +111,9 @@ function isString (value) {
 }
 
 api_response.then(data => console.log('asasdsad',data));
+
+let test = "12.1"
+console.log(typeof test)
+test = parseFloat(test)
+console.log(typeof test)
 
