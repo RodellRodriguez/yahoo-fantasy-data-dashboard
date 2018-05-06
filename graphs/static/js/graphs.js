@@ -18,8 +18,8 @@ api_response.then(data => {
 
 function make_graphs(stats, category){
 	let id = category+ '_chart';
-	let chart_element = document.getElementById(id);
-	c3.generate({
+	let chart_container = document.getElementById(id);
+	let chart = c3.generate({
 	        data: {
 	            columns: stats
 	        },
@@ -43,9 +43,12 @@ function make_graphs(stats, category){
 		        }
 		    },
 		    //Chart will appear on html side with the id pattern below
-		    bindto: '#'+ id
+		    //bindto: '#'+ id
 	    });
-	wrapElement(chart_element, "div", "col-lg-7");	
+	let wrapper = document.createElement("div");
+	wrapper.className += "col-lg-8";
+	wrapper.appendChild(chart.element);
+	chart_container.appendChild(wrapper);
 }
 
 function get_team_stats(data, stat_category){
@@ -62,7 +65,7 @@ function get_team_stats(data, stat_category){
 }
 
 function make_tables(stats, stat_category){
-	var heading = new Array("Team Name", "Average");
+	var heading = new Array("Name", "Avg.");
 
 	//Create Table
 	var table =document.createElement('TABLE'); 
@@ -72,9 +75,10 @@ function make_tables(stats, stat_category){
 	//Create Table Headings
 	var tr = document.createElement('TR');
 	tableBody.appendChild(tr)
+	let width = '200';
 	for (i=0; i < heading.length; i++){
 		var th = document.createElement('TH');
-		th.width = '200'
+		th.width = width;
 		th.appendChild(document.createTextNode(heading[i]))
 		tr.appendChild(th);
 	}
@@ -88,14 +92,17 @@ function make_tables(stats, stat_category){
 		
 		td = document.createElement('TD');
 		td.appendChild(document.createTextNode(calc_avg(stats[i].slice(1))));
-		td.style.textAlign = "middle";
+		td.style.textAlign = "center";
 		tr.appendChild(td)
 
 		tableBody.appendChild(tr);
 	}
-	let div_table = document.querySelector('#'+ stat_category+ '_table');
-	div_table.appendChild(table);
-	wrapElement(div_table, "div", "col-lg-5");
+
+	let table_container = document.querySelector('#'+ stat_category+ '_table');
+	let wrapper = document.createElement("div");
+	wrapper.className += "col-lg-4";
+	wrapper.appendChild(table);
+	table_container.appendChild(wrapper);
 
 }
 
