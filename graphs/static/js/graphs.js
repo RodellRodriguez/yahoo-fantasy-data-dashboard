@@ -17,6 +17,8 @@ api_response.then(data => {
 })	
 
 function make_graphs(stats, category){
+	let id = category+ '_chart';
+	let chart_element = document.getElementById(id);
 	c3.generate({
 	        data: {
 	            columns: stats
@@ -26,6 +28,10 @@ function make_graphs(stats, category){
 		            label: {
 		                text: 'Week',
 		                position: 'outer-left'
+		            },
+		            tick:{
+		            	//Starts x-axis at Week 1 instead of Week 0
+		            	format: function (x) { return x+1; }
 		            }
 		        },
 		        y: {
@@ -36,11 +42,10 @@ function make_graphs(stats, category){
 		            }
 		        }
 		    },
-		    title: {
-  				text: category
-			},
-		    bindto: '#'+ category+ '_chart'
+		    //Chart will appear on html side with the id pattern below
+		    bindto: '#'+ id
 	    });
+	wrapElement(chart_element, "div", "col-lg-7");	
 }
 
 function get_team_stats(data, stat_category){
@@ -61,7 +66,6 @@ function make_tables(stats, stat_category){
 
 	//Create Table
 	var table =document.createElement('TABLE'); 
-
 	var tableBody = document.createElement('TBODY');
 	table.appendChild(tableBody);
 
@@ -70,7 +74,7 @@ function make_tables(stats, stat_category){
 	tableBody.appendChild(tr)
 	for (i=0; i < heading.length; i++){
 		var th = document.createElement('TH');
-		th.width = '150'
+		th.width = '200'
 		th.appendChild(document.createTextNode(heading[i]))
 		tr.appendChild(th);
 	}
@@ -89,8 +93,9 @@ function make_tables(stats, stat_category){
 
 		tableBody.appendChild(tr);
 	}
-
-	document.querySelector('#'+ stat_category+ '_table').appendChild(table);
+	let div_table = document.querySelector('#'+ stat_category+ '_table');
+	div_table.appendChild(table);
+	wrapElement(div_table, "div", "col-lg-5");
 
 }
 
@@ -110,10 +115,14 @@ function isString (value) {
 	return typeof value === 'string' || value instanceof String;
 }
 
+function wrapElement(element, wrapper_tag, wrapper_class){
+	let parent = element.parentNode;
+	let wrapper = document.createElement(wrapper_tag);
+	wrapper.className += " " + wrapper_class;
+	parent.replaceChild(wrapper, element);
+	wrapper.appendChild(element);
+}
+
 api_response.then(data => console.log('asasdsad',data));
 
-let test = "12.1"
-console.log(typeof test)
-test = parseFloat(test)
-console.log(typeof test)
 

@@ -1,0 +1,27 @@
+h1 {
+	background-color: rgb(142, 74, 221);
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
+
+th {
+	color: red;
+}
+
+.containment{
+	 padding: 30px;
+	 
+}
+
+.col-lg-4{
+	
+}
+
+h3 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+}
+
+.row{
+	padding-top: 30px;
+}
