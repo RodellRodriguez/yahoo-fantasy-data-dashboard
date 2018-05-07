@@ -17,6 +17,17 @@ My friends and I played fantasy sports using [Yahoo Fantasy Basketball](https://
 
 Whoever wins the most categories by the end of Sunday night attains a win for that week. Ties are possible and has happened.
 
+**Dependencies**
+* Python
+* Django
+* Javascript
+* PostgreSQL
+* Bootstrap
+* CSS
+* HTML
+
+Part of the web-app involved loading the web-app with a database. [This custom Python ETL program](https://github.com/RodellRodriguez/fantasy-basketball-yahoo/tree/master/league_standings) was used to extract the relevant stats using Yahoo's API and load the 
+
 ## Problem 
 
 In order to get the edge over all of your opponents, it would be great to know how your stats for the 9 categories fares against everyone else's stats to be wary of future match ups. Yahoo has a feature that does just that, however it falls short. That feature gives you the grand total of all of your stats and all of your weeks combined. What if you only wanted to know how your stats fared against another opponent for a certain week? Say on weeks 9-12 you did great in rebounds and blocks but you sacrificed Free Throw %, Points, and Three Pointers Made? Let's also say that in week 13 you will be facing an opponent that is not only extremely strong in the stat categories where you are weak in but is also strong in the stat categories you are neutral in? That would mean you suffer a high probability of losing week 13. 

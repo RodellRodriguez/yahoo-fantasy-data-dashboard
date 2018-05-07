@@ -4,6 +4,14 @@ let CATEGORIES = ['assists','blocks','field_goal_percentage'
 
 let NUM_OF_TEAMS = 8;
 
+let chart_and_graphs = document.getElementsByClassName("col-lg-4");
+for (let i = 0; i < chart_and_graphs.length; i++){
+	let spinner = document.createElement("div");
+	spinner.id += "loader_" + CATEGORIES[i];
+	spinner.className = "spinner";
+	chart_and_graphs[i].appendChild(spinner);
+}
+
 let api_response = fetch('/api')
 	.then(response => {return response.json(); })
 	.catch(function(error){console.log('error is ',error)});
@@ -13,7 +21,8 @@ api_response.then(data => {
 		let all_stats_per_category = get_team_stats(data, category);
 		make_graphs(all_stats_per_category, category);
 		make_tables(all_stats_per_category, category);
-	}	
+		document.getElementById("loader_" + category).style.display = "none";
+	}
 })	
 
 function make_graphs(stats, category){

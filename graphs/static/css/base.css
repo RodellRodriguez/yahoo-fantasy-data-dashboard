@@ -1,0 +1,17 @@
+h1 {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+.containment{
+	font-family: 'Roboto', sans-serif;
+	 padding-bottom: 50px;
+	 padding-left: 10px;
+	 padding-right: 20px;
+}
+
+.heading{
+	background-color: rgb(153, 51, 255);
+	overflow: hidden;
+}
